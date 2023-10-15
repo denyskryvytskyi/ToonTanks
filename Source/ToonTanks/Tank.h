@@ -23,11 +23,15 @@ protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
+    // Called every frame
+    virtual void Tick(float DeltaTime) override;
+
 	// Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
     void Move(const FInputActionValue& Value);
+    void Turn(const FInputActionValue& Value);
 
 private:
     /** Components **/
@@ -37,11 +41,23 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComp;
 
-	/** MappingContext */
+
+	/** Input */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     class UInputMappingContext* DefaultMappingContext;
 
-    /** Move Input Action */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     class UInputAction* MoveAction;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    class UInputAction* TurnAction;
+
+    /** Parameters*/
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+    float Speed { 200.0f };
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+    float TurnRate { 100.0f };
+
+    APlayerController* PlayerControllerRef;
 };
