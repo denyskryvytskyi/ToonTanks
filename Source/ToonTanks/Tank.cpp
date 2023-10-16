@@ -47,6 +47,11 @@ void ATank::Tick(float DeltaTime)
 
         DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 
                         20.0f, 32, FColor::Red, false);
+
+        if (HitResult.bBlockingHit)
+        {
+            RotateTurret(HitResult.ImpactPoint);
+        }
     }
 }
 
@@ -61,16 +66,16 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
         // Turning around
         EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ATank::Turn);
+
+        // Shooting
+        EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATank::FireFromInput);
     }
 }
 
-#pragma optimize("", off)
 void ATank::Move(const FInputActionValue& Value)
 {
     if (Controller)
     {
-        UE_LOG(LogTemp, Display, TEXT("Moving..."));
-
         const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
 
         const FVector2D MovementVector = Value.Get<FVector2D>();
@@ -85,8 +90,6 @@ void ATank::Move(const FInputActionValue& Value)
 void ATank::Turn(const FInputActionValue& Value)
 {
     if (Controller) {
-        UE_LOG(LogTemp, Display, TEXT("Turning around..."));
-
         const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
 
         const FVector2D RotationValue = Value.Get<FVector2D>();
@@ -96,4 +99,9 @@ void ATank::Turn(const FInputActionValue& Value)
 
         AddActorLocalRotation(DeltaRotation, true);
     }
+}
+
+void ATank::FireFromInput(const FInputActionValue& Value)
+{
+    Fire();
 }

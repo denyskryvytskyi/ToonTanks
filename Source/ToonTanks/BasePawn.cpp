@@ -1,8 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "BasePawn.h"
+#include "Projectile.h"
 
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -21,4 +23,26 @@ ABasePawn::ABasePawn()
 
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
     ProjectileSpawnPoint->SetupAttachment(TurretMesh);
+}
+
+void ABasePawn::RotateTurret(const FVector& LookAtTarget)
+{
+    const FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
+
+    const FRotator LookAtRotation(0.0f, ToTarget.Rotation().Yaw, 0.0f);
+
+    TurretMesh->SetWorldRotation(FMath::RInterpTo(TurretMesh->GetComponentRotation(),
+                                 LookAtRotation,
+                                 UGameplayStatics::GetWorldDeltaSeconds(this),
+                                 RotationInterpSpeed));
+}
+
+void ABasePawn::Fire()
+{
+    DrawDebugSphere(GetWorld(), ProjectileSpawnPoint->GetComponentLocation(),
+        20.0f, 32, FColor::Red, false);
+
+    GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+        ProjectileSpawnPoint->GetComponentLocation(),
+        ProjectileSpawnPoint->GetComponentRotation());
 }

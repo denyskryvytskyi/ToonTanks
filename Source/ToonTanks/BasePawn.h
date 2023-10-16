@@ -15,7 +15,11 @@ public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
 
-private:
+protected:
+	void RotateTurret(const FVector& LookAtTarget);
+    void Fire();
+
+protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
     class UCapsuleComponent* CapsuleComp;
 
@@ -27,4 +31,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
     USceneComponent* ProjectileSpawnPoint;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	TSubclassOf<class AProjectile> ProjectileClass;
+	
+	UPROPERTY(EditAnywhere, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+    float RotationInterpSpeed { 5.0f };
 };

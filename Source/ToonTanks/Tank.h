@@ -32,6 +32,7 @@ protected:
 protected:
     void Move(const FInputActionValue& Value);
     void Turn(const FInputActionValue& Value);
+    void FireFromInput(const FInputActionValue& Value);
 
 private:
     /** Components **/
@@ -51,6 +52,9 @@ private:
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     class UInputAction* TurnAction;
+    
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    class UInputAction* FireAction;
 
     /** Parameters*/
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
