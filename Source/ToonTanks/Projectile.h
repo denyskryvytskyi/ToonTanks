@@ -19,6 +19,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Combat")
@@ -26,4 +28,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UProjectileMovementComponent* MovementComp;
+
+	UPROPERTY(EditAnywhere)
+	float Damage { 50.0f };
 };
