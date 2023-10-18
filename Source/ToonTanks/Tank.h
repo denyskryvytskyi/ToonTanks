@@ -19,11 +19,13 @@ class TOONTANKS_API ATank : public ABasePawn
 public:
 	ATank();
 
+    virtual void HandleDestruction() override;
+
+    APlayerController* GetPlayerController() const { return TankPlayerController; }
+
 protected:
-    // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
-    // Called every frame
     virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
@@ -63,5 +65,5 @@ private:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
     float TurnRate { 100.0f };
 
-    APlayerController* PlayerControllerRef;
+    APlayerController* TankPlayerController;
 };

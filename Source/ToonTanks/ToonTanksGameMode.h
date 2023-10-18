@@ -13,5 +13,21 @@ UCLASS()
 class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+    void ActorDied(AActor* Actor);
+
+protected:
+    virtual void BeginPlay() override;
 	
+    void HandleGameStart();
+
+    UFUNCTION(BlueprintImplementableEvent)
+    void StartGame();
+
+private:
+    class ATank* Tank;
+    class AToonTanksPlayerController* ToonTanksPlayerController;
+
+    float StartDelay { 3.0f };
 };

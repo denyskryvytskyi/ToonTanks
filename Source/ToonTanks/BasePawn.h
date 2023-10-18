@@ -12,8 +12,9 @@ class TOONTANKS_API ABasePawn : public APawn
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	ABasePawn();
+
+	virtual void HandleDestruction();
 
 protected:
 	void RotateTurret(const FVector& LookAtTarget);

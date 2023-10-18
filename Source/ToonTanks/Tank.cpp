@@ -22,14 +22,21 @@ ATank::ATank()
     CameraComp->SetupAttachment(SpringArmComp);
 }
 
+void ATank::HandleDestruction()
+{
+    Super::HandleDestruction();
+    SetActorHiddenInGame(true);
+    SetActorTickEnabled(false);
+}
+
 void ATank::BeginPlay()
 {
     Super::BeginPlay();
 
-    PlayerControllerRef = GetController<APlayerController>();
+    TankPlayerController = GetController<APlayerController>();
 
-    if (PlayerControllerRef) {
-        if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerControllerRef->GetLocalPlayer())) {
+    if (TankPlayerController) {
+        if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(TankPlayerController->GetLocalPlayer())) {
             Subsystem->AddMappingContext(DefaultMappingContext, 0);
         }
     }
@@ -39,14 +46,11 @@ void ATank::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (PlayerControllerRef)
+    if (TankPlayerController)
     {
         FHitResult HitResult;
-        PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
+        TankPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
                                                      false, HitResult);
-
-        DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 
-                        20.0f, 32, FColor::Red, false);
 
         if (HitResult.bBlockingHit)
         {

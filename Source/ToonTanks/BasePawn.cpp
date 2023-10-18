@@ -6,10 +6,8 @@
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values
 ABasePawn::ABasePawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
@@ -23,6 +21,11 @@ ABasePawn::ABasePawn()
 
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
     ProjectileSpawnPoint->SetupAttachment(TurretMesh);
+}
+
+void ABasePawn::HandleDestruction()
+{
+    // TODO: effects/sounds 
 }
 
 void ABasePawn::RotateTurret(const FVector& LookAtTarget)
@@ -39,9 +42,6 @@ void ABasePawn::RotateTurret(const FVector& LookAtTarget)
 
 void ABasePawn::Fire()
 {
-    DrawDebugSphere(GetWorld(), ProjectileSpawnPoint->GetComponentLocation(),
-        20.0f, 32, FColor::Red, false);
-
     auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
                                                           ProjectileSpawnPoint->GetComponentLocation(),
                                                           ProjectileSpawnPoint->GetComponentRotation());

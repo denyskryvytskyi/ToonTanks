@@ -8,6 +8,12 @@
 #include "Kismet/GameplayStatics.h"
 
 
+void ATower::HandleDestruction()
+{
+    Super::HandleDestruction();
+    Destroy();
+}
+
 void ATower::BeginPlay()
 {
     Super::BeginPlay();
