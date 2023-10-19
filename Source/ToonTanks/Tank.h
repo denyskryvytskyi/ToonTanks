@@ -23,6 +23,8 @@ public:
 
     APlayerController* GetPlayerController() const { return TankPlayerController; }
 
+    bool IsAlive() const { return bIsAlive; }
+
 protected:
     virtual void BeginPlay() override;
 
@@ -66,4 +68,6 @@ private:
     float TurnRate { 100.0f };
 
     APlayerController* TankPlayerController;
+
+    bool bIsAlive { false };
 };

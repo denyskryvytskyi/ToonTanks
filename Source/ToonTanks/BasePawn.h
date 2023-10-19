@@ -41,6 +41,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
     class USoundBase* DeathSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+    TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
 	
 	UPROPERTY(EditAnywhere, Category = "Movement")
     float RotationInterpSpeed { 5.0f };

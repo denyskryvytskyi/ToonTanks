@@ -6,6 +6,7 @@
 #include "GameFramework/DamageType.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Camera/CameraShakeBase.h"
 
 AProjectile::AProjectile()
 {
@@ -34,22 +35,28 @@ void AProjectile::BeginPlay()
 
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (auto MyOwner = GetOwner())
+	if (AActor* MyOwner = GetOwner())
 	{
-        auto OwnerInstigator = Owner->GetInstigatorController();
-        auto DamageTypeClass = UDamageType::StaticClass();
+        AController* OwnerInstigator = Owner->GetInstigatorController();
+        UClass* DamageTypeClass = UDamageType::StaticClass();
 
 		if (OtherActor && OtherActor != this && OtherActor != MyOwner)
 		{
+            UGameplayStatics::ApplyDamage(OtherActor, Damage, OwnerInstigator, this, DamageTypeClass);
+
             if (HitSound)
 			{
                 UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
             }
 
-            UGameplayStatics::ApplyDamage(OtherActor, Damage, OwnerInstigator, this, DamageTypeClass);
             if (HitParticles)
 			{
 				UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
+			}
+
+			if (HitCameraShakeClass)
+			{
+				GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShakeClass);
 			}
 		}
 	}

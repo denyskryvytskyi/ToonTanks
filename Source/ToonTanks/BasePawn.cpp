@@ -5,6 +5,7 @@
 
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Camera/CameraShakeBase.h"
 
 ABasePawn::ABasePawn()
 {
@@ -34,6 +35,11 @@ void ABasePawn::HandleDestruction()
     {
         UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());
     }
+
+    if (DeathCameraShakeClass)
+    {
+        GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+    }
 }
 
 void ABasePawn::RotateTurret(const FVector& LookAtTarget)
@@ -50,7 +56,7 @@ void ABasePawn::RotateTurret(const FVector& LookAtTarget)
 
 void ABasePawn::Fire()
 {
-    auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+    AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
                                                           ProjectileSpawnPoint->GetComponentLocation(),
                                                           ProjectileSpawnPoint->GetComponentRotation());
 

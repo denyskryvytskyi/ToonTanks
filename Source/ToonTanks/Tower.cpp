@@ -28,24 +28,21 @@ void ATower::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (Tank)
+    if (CanFire())
     {
-        if (IsInFireRange())
-        {
-            RotateTurret(Tank->GetActorLocation());
-        }
+        RotateTurret(Tank->GetActorLocation());
     }
 }
 
 void ATower::TryFire()
 {
-    if (IsInFireRange())
+    if (CanFire())
     {
         Fire();
     }
 }
 
-bool ATower::IsInFireRange() const
+bool ATower::CanFire() const
 {
-    return Tank && FVector::Dist(GetActorLocation(), Tank->GetActorLocation()) <= FireRange;
+    return Tank && Tank->IsAlive() && FVector::Dist(GetActorLocation(), Tank->GetActorLocation()) <= FireRange;
 }

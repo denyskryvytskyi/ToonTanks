@@ -24,7 +24,7 @@ protected:
 
     void TryFire();
 
-    bool IsInFireRange() const;
+    bool CanFire() const;
 
 private:
     UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))

@@ -25,14 +25,17 @@ ATank::ATank()
 void ATank::HandleDestruction()
 {
     Super::HandleDestruction();
+
     SetActorHiddenInGame(true);
     SetActorTickEnabled(false);
+
+    bIsAlive = false;
 }
 
 void ATank::BeginPlay()
 {
     Super::BeginPlay();
-
+    bIsAlive = true;
     TankPlayerController = GetController<APlayerController>();
 
     if (TankPlayerController) {
