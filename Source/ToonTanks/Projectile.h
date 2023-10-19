@@ -27,6 +27,18 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	class UProjectileMovementComponent* MovementComp;
 
+    UPROPERTY(VisibleAnywhere, Category = "Combat")
+    class UParticleSystemComponent* TrailParticleSystemComp;
+
 	UPROPERTY(EditAnywhere)
 	float Damage { 50.0f };
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystem* HitParticles;
+	
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* LaunchSound;
+	
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	USoundBase* HitSound;
 };

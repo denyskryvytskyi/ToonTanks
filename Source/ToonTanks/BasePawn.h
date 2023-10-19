@@ -21,21 +21,27 @@ protected:
     void Fire();
 
 protected:
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
     class UCapsuleComponent* CapsuleComp;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
     UStaticMeshComponent* BaseMesh;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
     UStaticMeshComponent* TurretMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
     USceneComponent* ProjectileSpawnPoint;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TSubclassOf<class AProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+    class UParticleSystem* DeathParticles;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+    class USoundBase* DeathSound;
 	
-	UPROPERTY(EditAnywhere, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, Category = "Movement")
     float RotationInterpSpeed { 5.0f };
 };
