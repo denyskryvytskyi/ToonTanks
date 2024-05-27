@@ -14,3 +14,8 @@ Here are some specific things I learned while making this game:
 - Camera shake effect
 
 https://github.com/denyskryvytskyi/ToonTanks/assets/25298585/101bc093-dabe-491b-938a-2a4a26c7461b
+
+# Getting started
+*Updated to the Unreal Engine 5.4.1.*
+1. `git clone https://github.com/denyskryvytskyi/ToonTanks`
+2. Run `ToonTanks.uproject`
