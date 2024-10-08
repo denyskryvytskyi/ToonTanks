@@ -13,7 +13,11 @@ Here are some specific things I learned while making this game:
 - Sounds on fire and destroy
 - Camera shake effect
 
-https://github.com/denyskryvytskyi/ToonTanks/assets/25298585/101bc093-dabe-491b-938a-2a4a26c7461b
+# Demo
+Video on YouTube (click on image):
+
+
+[![ToonTanksThumbnail](.github/demo/ToonTanksThumbnail.png)](https://youtu.be/OqnVpx-66cU?si=7spcowMuWaRDy6k7)
 
 # Getting started
 *Updated to the Unreal Engine 5.4.1.*
