@@ -19,6 +19,12 @@ void AToonTanksGameMode::ActorDied(AActor* Actor)
             ToonTanksPlayerController->SetPlayerEnabledState(false);
         }
         GameOver(false);
+
+        FTimerHandle LevelRestartTimerHandle;
+        FTimerDelegate LevelRestartTimerDelegate = FTimerDelegate::CreateUObject(ToonTanksPlayerController,
+            &AToonTanksPlayerController::RestartLevel);
+
+        GetWorldTimerManager().SetTimer(LevelRestartTimerHandle, LevelRestartTimerDelegate, RestartLevelDelay, false);
     }
     else if (ATower* Destroyed = Cast<ATower>(Actor))
     {

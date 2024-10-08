@@ -37,6 +37,7 @@ private:
     class AToonTanksPlayerController* ToonTanksPlayerController;
 
     float StartDelay { 3.0f };
+    float RestartLevelDelay { 3.0f };
 
     UPROPERTY(EditAnywhere, category = "Game Logic")
     int32 TargetTowersAmount { 4 };
