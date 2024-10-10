@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Denys Kryvytskyi. All Rights Reserved.
 
 #include "Tower.h"
 #include "Tank.h"
@@ -6,7 +6,6 @@
 #include "TimerManager.h"
 
 #include "Kismet/GameplayStatics.h"
-
 
 void ATower::HandleDestruction()
 {
@@ -20,7 +19,7 @@ void ATower::BeginPlay()
 
     Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 
-    GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, 
+    GetWorldTimerManager().SetTimer(FireRateTimerHandle, this,
                                     &ATower::TryFire, FireRate, true);
 }
 
@@ -28,16 +27,14 @@ void ATower::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (CanFire())
-    {
+    if (CanFire()) {
         RotateTurret(Tank->GetActorLocation());
     }
 }
 
 void ATower::TryFire()
 {
-    if (CanFire())
-    {
+    if (CanFire()) {
         Fire();
     }
 }

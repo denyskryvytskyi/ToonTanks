@@ -1,25 +1,24 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Denys Kryvytskyi. All Rights Reserved.
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "CoreMinimal.h"
+
 #include "HealthComponent.generated.h"
 
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
+class TOONTANKS_API UHealthComponent : public UActorComponent {
+    GENERATED_BODY()
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class TOONTANKS_API UHealthComponent : public UActorComponent
-{
-	GENERATED_BODY()
-
-public:	
-	UHealthComponent();
+public:
+    UHealthComponent();
 
 protected:
-	virtual void BeginPlay() override;
+    virtual void BeginPlay() override;
 
-public:	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+public:
+    virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
     UFUNCTION()
@@ -31,5 +30,5 @@ private:
 
     float CurrentHealth { 0.0f };
 
-	class AToonTanksGameMode* ToonTanksGameMode;
+    class AToonTanksGameMode* ToonTanksGameMode;
 };

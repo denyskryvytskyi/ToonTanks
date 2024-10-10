@@ -1,9 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Denys Kryvytskyi. All Rights Reserved.
 
 #include "Tank.h"
 
-#include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -17,7 +17,7 @@ ATank::ATank()
 {
     SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
     SpringArmComp->SetupAttachment(RootComponent);
-    
+
     CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     CameraComp->SetupAttachment(SpringArmComp);
 }
@@ -49,14 +49,12 @@ void ATank::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (TankPlayerController)
-    {
+    if (TankPlayerController) {
         FHitResult HitResult;
         TankPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
-                                                     false, HitResult);
+                                                      false, HitResult);
 
-        if (HitResult.bBlockingHit)
-        {
+        if (HitResult.bBlockingHit) {
             RotateTurret(HitResult.ImpactPoint);
         }
     }
@@ -81,12 +79,11 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::Move(const FInputActionValue& Value)
 {
-    if (Controller)
-    {
+    if (Controller) {
         const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
 
         const FVector2D MovementVector = Value.Get<FVector2D>();
-        
+
         FVector DeltaLocation(0.f);
         DeltaLocation.X = MovementVector.Y * Speed * DeltaTime;
 

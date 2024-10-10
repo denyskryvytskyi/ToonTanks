@@ -1,18 +1,15 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Denys Kryvytskyi. All Rights Reserved.
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "BasePawn.h"
+#include "CoreMinimal.h"
+
 #include "Tower.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class TOONTANKS_API ATower : public ABasePawn
-{
-	GENERATED_BODY()
+class TOONTANKS_API ATower : public ABasePawn {
+    GENERATED_BODY()
 
 public:
     virtual void HandleDestruction() override;
@@ -29,7 +26,7 @@ protected:
 private:
     UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
     float FireRange { 1000.0f };
-    
+
     UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
     float FireRate { 2.0f };
 

@@ -1,12 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+// Copyright Denys Kryvytskyi. All Rights Reserved.
 
 #include "ToonTanksPlayerController.h"
 
 void AToonTanksPlayerController::SetPlayerEnabledState(bool bIsPlayerEnabled)
 {
-    if (bIsPlayerEnabled)
-    {
+    if (bIsPlayerEnabled) {
         GetPawn()->EnableInput(this);
     } else {
         GetPawn()->DisableInput(this);
