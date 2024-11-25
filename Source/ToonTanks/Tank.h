@@ -8,7 +8,6 @@
 
 #include "Tank.generated.h"
 
-
 UCLASS()
 class TOONTANKS_API ATank : public ABasePawn {
     GENERATED_BODY()
@@ -34,6 +33,7 @@ protected:
     void Move(const FInputActionValue& Value);
     void Turn(const FInputActionValue& Value);
     void FireFromInput(const FInputActionValue& Value);
+    void Cursor(const FInputActionValue& Value);
 
 private:
     /** Components **/
@@ -56,12 +56,18 @@ private:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     class UInputAction* FireAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    class UInputAction* CursorAction;
+
     /** Parameters*/
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
     float Speed { 200.0f };
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
     float TurnRate { 100.0f };
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input", meta = (AllowPrivateAccess = "true"))
+    float GamepadCursorSpeed { 10.0f };
 
     APlayerController* TankPlayerController;
 

@@ -74,6 +74,9 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
         // Shooting
         EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATank::FireFromInput);
+
+        // Cursor
+        EnhancedInputComponent->BindAction(CursorAction, ETriggerEvent::Triggered, this, &ATank::Cursor);
     }
 }
 
@@ -108,4 +111,16 @@ void ATank::Turn(const FInputActionValue& Value)
 void ATank::FireFromInput(const FInputActionValue& Value)
 {
     Fire();
+}
+
+void ATank::Cursor(const FInputActionValue& Value)
+{
+    if (TankPlayerController) {
+        const FVector2D CursorValue = Value.Get<FVector2D>();
+        const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+
+        float MouseX, MouseY;
+        TankPlayerController->GetMousePosition(MouseX, MouseY);
+        TankPlayerController->SetMouseLocation(CursorValue.X * GamepadCursorSpeed + MouseX, CursorValue.Y * GamepadCursorSpeed + MouseY);
+    }
 }
