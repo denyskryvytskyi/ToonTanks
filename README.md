@@ -3,8 +3,9 @@ This is a 3D game created in Unreal Engine 5 as part of the Unreal Engine 5 C++ 
 
 Here are some specific things I learned while making this game:
 
-- Custom Pawn class for the Tank and Towers.
-- New Enhanced Input system usage for the player controller with custom input actions and input mapping context.
+- Custom Pawn class for the Tank and Towers
+- New Enhanced Input system usage for the player controller with custom input actions and input mapping context
+- Gamepad support
 - Tank movement using player input
 - Projectiles spawning on Tank/Tower shooting
 - Health, damage and destruction logic
