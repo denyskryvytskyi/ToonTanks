@@ -15,11 +15,11 @@ Here are some specific things I learned while making this game:
 
 # Demo
 Video on YouTube (click on image):
-
-
-[![ToonTanksThumbnail](.github/demo/ToonTanksThumbnail.png)](https://youtu.be/OqnVpx-66cU?si=7spcowMuWaRDy6k7)
+[<img src=".github/demo/ToonTanksThumbnail.png">](https://youtu.be/OqnVpx-66cU?si=7spcowMuWaRDy6k7)
 
 # Getting started
-*Updated to the Unreal Engine 5.4.1.*
+*Updated to the Unreal Engine 5.4.3.*
 1. `git clone https://github.com/denyskryvytskyi/ToonTanks`
-2. Run `ToonTanks.uproject`
+2. Right-click the `ToonTanks.uproject` file and select `Generate Visual Studio project files`
+3. Build project in Visual Studio (`Development Editor` configuration to run in Editor)
+4. Run `ToonTanks.uproject`
